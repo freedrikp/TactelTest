@@ -48,6 +48,34 @@ public class XMLDatabase {
 		return articleNames;
 	}
 	
-//	public void getArticleDetails()
+	public String[][] getArticleDetails(String selectedArticleID){
+		Node selectedNode = null;
+		NodeList nodes = document.getElementsByTagName("artikel");
+		for (int i = 0; i < nodes.getLength(); i++){
+			Node node = nodes.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE)
+			{
+				Element nodeElement = (Element)node;
+				String articleID = nodeElement.getElementsByTagName("Artikelid").item(0).getTextContent();
+				if (articleID.equals(selectedArticleID))
+				{
+					selectedNode = node;
+					break;
+				}
+				
+			}
+		}
+		if (selectedNode == null){
+			return null;
+		}
+		NodeList children = selectedNode.getChildNodes();
+		String[][] details = new String[children.getLength()][2];
+		for (int i = 0; i < children.getLength(); i++){
+			Node child = children.item(i);
+			details[i][0] = child.getNodeName();
+			details[i][1] = child.getTextContent();
+		}
+		return details;
+	}
 
 }
