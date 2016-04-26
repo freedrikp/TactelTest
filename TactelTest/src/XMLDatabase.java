@@ -31,16 +31,16 @@ public class XMLDatabase {
 		}
 	}
 	
-	public List<String> getArticleNames(){
+	public String[] getArticleNames(){
 		NodeList nodes = document.getElementsByTagName("artikel");
-		ArrayList<String> articleNames = new ArrayList<String>(nodes.getLength());
+		String[] articleNames = new String[nodes.getLength()];
 		for (int i = 0; i < nodes.getLength(); i++){
 			Node node = nodes.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE)
 			{
 				Element nodeElement = (Element)node;
 				String articleName = nodeElement.getElementsByTagName("Namn").item(0).getTextContent();
-				articleNames.add(articleName);
+				articleNames[i]=articleName;
 			}
 		}
 		return articleNames;

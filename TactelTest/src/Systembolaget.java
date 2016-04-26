@@ -1,7 +1,6 @@
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 
 public class Systembolaget {
 
@@ -13,11 +12,9 @@ public class Systembolaget {
 					"http://www.systembolaget.se/api/assortment/products/xml");
 			in = new BufferedInputStream(xmlurl.openStream());
 
-			XMLDatabase xmlParser = new XMLDatabase(in);
-			List<String> articleNames = xmlParser.getArticleNames();
-			for (String articleName : articleNames){
-				System.out.println(articleName);
-			}
+			XMLDatabase xmlData = new XMLDatabase(in);
+			
+			Frame frame = new Frame(xmlData);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
