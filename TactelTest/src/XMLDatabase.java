@@ -77,5 +77,30 @@ public class XMLDatabase {
 		}
 		return details;
 	}
+	
+	public ArrayList<String[]> searchForArticle(String searchedArticleName){
+		searchedArticleName = searchedArticleName.toLowerCase();
+		ArrayList<String[]> results = new ArrayList<String[]>();
+		NodeList nodes = document.getElementsByTagName("artikel");
+		String[][] articleNames = new String[nodes.getLength()][2];
+		for (int i = 0; i < nodes.getLength(); i++){
+			Node node = nodes.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE)
+			{
+				Element nodeElement = (Element)node;
+				String articleID = nodeElement.getElementsByTagName("Artikelid").item(0).getTextContent();
+				articleNames[i][0] = articleID;
+				String articleName = nodeElement.getElementsByTagName("Namn").item(0).getTextContent();
+				articleName = articleName.toLowerCase();
+				if (articleName.startsWith(searchedArticleName) || articleName.endsWith(searchedArticleName)){
+					String[] entry = new String[2];
+					entry[0] = articleID;
+					entry[1] = articleName;
+					results.add(entry);
+				}
+			}
+		}
+		return results;
+	}
 
 }
