@@ -31,19 +31,23 @@ public class XMLDatabase {
 		}
 	}
 	
-	public String[] getArticleNames(){
+	public String[][] getArticleNames(){
 		NodeList nodes = document.getElementsByTagName("artikel");
-		String[] articleNames = new String[nodes.getLength()];
+		String[][] articleNames = new String[nodes.getLength()][2];
 		for (int i = 0; i < nodes.getLength(); i++){
 			Node node = nodes.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE)
 			{
 				Element nodeElement = (Element)node;
+				String articleID = nodeElement.getElementsByTagName("Artikelid").item(0).getTextContent();
+				articleNames[i][0] = articleID;
 				String articleName = nodeElement.getElementsByTagName("Namn").item(0).getTextContent();
-				articleNames[i]=articleName;
+				articleNames[i][1] = articleName;
 			}
 		}
 		return articleNames;
 	}
+	
+//	public void getArticleDetails()
 
 }

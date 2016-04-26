@@ -1,11 +1,14 @@
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Frame extends JFrame{
 	private XMLDatabase xmlData;
-	private JList<String> articleList;
+	private JTable articleList;
+	private static final String[] articleTableHeader = {"ID","Namn"};
 	
 	public Frame(XMLDatabase xmlData){
 		this.xmlData = xmlData;
@@ -15,7 +18,7 @@ public class Frame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JScrollPane articlesPane = new JScrollPane();
-		articleList = new JList<String>();
+		articleList = new JTable();
 		articlesPane.setViewportView(articleList);
 		add(articlesPane);
 		
@@ -24,7 +27,7 @@ public class Frame extends JFrame{
 	}
 	
 	private void updateArticleList(){
-		articleList.setListData(xmlData.getArticleNames());
+		articleList.setModel(new ArticleTableModel(xmlData.getArticleNames(),articleTableHeader));
 	}
 
 }
