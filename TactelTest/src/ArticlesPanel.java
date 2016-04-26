@@ -12,8 +12,8 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class ArticlesPanel extends JPanel implements ListSelectionListener{
-	private JTable articleTable;
-	private static final String[] articleTableHeader = {"ID","Namn"};
+	protected JTable articleTable;
+	protected static final String[] articleTableHeader = {"ID","Namn"};
 	private JPanel detailsPanel;
 	private JFrame parentFrame;
 	private XMLDatabase xmlData;
@@ -33,11 +33,9 @@ public class ArticlesPanel extends JPanel implements ListSelectionListener{
 		detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
 		detailsPane.setViewportView(detailsPanel);
 		add(detailsPane,BorderLayout.EAST);
-		
-		updateArticleList();
 	}
 	
-	private void updateArticleList(){
+	public void updateArticles(){
 		articleTable.setModel(new ArticleTableModel(xmlData.getArticleNames(),articleTableHeader));
 	}
 	

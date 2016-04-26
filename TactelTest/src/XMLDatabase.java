@@ -78,9 +78,9 @@ public class XMLDatabase {
 		return details;
 	}
 	
-	public ArrayList<String[]> searchForArticle(String searchedArticleName){
+	public String[][] searchForArticle(String searchedArticleName){
 		searchedArticleName = searchedArticleName.toLowerCase();
-		ArrayList<String[]> results = new ArrayList<String[]>();
+		ArrayList<String[]> tempResults = new ArrayList<String[]>();
 		NodeList nodes = document.getElementsByTagName("artikel");
 		String[][] articleNames = new String[nodes.getLength()][2];
 		for (int i = 0; i < nodes.getLength(); i++){
@@ -96,11 +96,21 @@ public class XMLDatabase {
 					String[] entry = new String[2];
 					entry[0] = articleID;
 					entry[1] = articleName;
-					results.add(entry);
+					tempResults.add(entry);
 				}
 			}
 		}
-		return results;
+		int nbrResults = tempResults.size();
+		if (nbrResults <= 0){
+			return null;
+		}
+		String[][] searchResults = new String[nbrResults][2];
+		for (int i = 0; i < nbrResults; i++){
+			String[] entry = tempResults.get(i);
+			searchResults[i][0] = entry[0];
+			searchResults[i][1] = entry[1];
+		}
+		return searchResults;
 	}
 
 }
