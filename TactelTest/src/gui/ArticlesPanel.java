@@ -1,3 +1,4 @@
+package gui;
 import java.awt.BorderLayout;
 
 import javax.swing.BoxLayout;
@@ -9,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import database.XMLDatabase;
 
 
 public class ArticlesPanel extends JPanel implements ListSelectionListener{

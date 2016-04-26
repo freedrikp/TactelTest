@@ -1,6 +1,10 @@
+import gui.Frame;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
+
+import database.XMLDatabase;
 
 public class Systembolaget {
 

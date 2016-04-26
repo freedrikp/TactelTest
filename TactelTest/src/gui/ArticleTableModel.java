@@ -1,3 +1,4 @@
+package gui;
 import javax.swing.table.DefaultTableModel;
 
 public class ArticleTableModel extends DefaultTableModel {

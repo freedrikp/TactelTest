@@ -1,4 +1,7 @@
+package gui;
 import javax.swing.JFrame;
+
+import database.XMLDatabase;
 
 
 public class SearchResultsArticlePanel extends ArticlesPanel {
