@@ -15,4 +15,8 @@ public class SearchResultsArticlePanel extends ArticlesPanel {
 	public void updateArticles(){
 		articleTable.setModel(new ArticleTableModel(articles,articleTableHeader));
 	}
+	
+	protected void addFilterPanel(){
+		return;
+	}
 }

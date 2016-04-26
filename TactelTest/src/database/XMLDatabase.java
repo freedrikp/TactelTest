@@ -32,7 +32,7 @@ public class XMLDatabase {
 		}
 	}
 	
-	public String[][] getArticleNames(){
+	public String[][] getArticleNames(boolean koscher,boolean eco){
 		NodeList nodes = document.getElementsByTagName("artikel");
 		String[][] articleNames = new String[nodes.getLength()][2];
 		for (int i = 0; i < nodes.getLength(); i++){
@@ -40,6 +40,22 @@ public class XMLDatabase {
 			if (node.getNodeType() == Node.ELEMENT_NODE)
 			{
 				Element nodeElement = (Element)node;
+				NodeList ecoList = nodeElement.getElementsByTagName("Ekologisk");
+				if (ecoList.getLength() > 0){
+				boolean isEco = ecoList.item(0).getTextContent().equals("1");
+				if (eco && !isEco)
+				{
+					continue;
+				}
+				}
+				NodeList koscherList = nodeElement.getElementsByTagName("Koscher");
+				if (koscherList.getLength() > 0){
+				boolean isKoscher = koscherList.item(0).getTextContent().equals("1");
+				if (koscher && !isKoscher)
+				{
+					continue;
+				}
+				}
 				String articleID = nodeElement.getElementsByTagName("Artikelid").item(0).getTextContent();
 				articleNames[i][0] = articleID;
 				String articleName = nodeElement.getElementsByTagName("Namn").item(0).getTextContent();
